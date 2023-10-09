@@ -1,0 +1,1 @@
+# sergy_photo_microservice_v1
