@@ -1,14 +1,10 @@
 package com.appsdeveloperblog.photoapp.api.users.ui.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.appsdeveloperblog.photoapp.api.users.data.AlbumServiceClient;
 import com.appsdeveloperblog.photoapp.api.users.service.UserService;
 import com.appsdeveloperblog.photoapp.api.users.shared.UserDto;
-import com.appsdeveloperblog.photoapp.api.users.ui.model.AlbumResponseModel;
 import com.appsdeveloperblog.photoapp.api.users.ui.model.CreateUserRequestModel;
 import com.appsdeveloperblog.photoapp.api.users.ui.model.CreateUserResponseModel;
 import com.appsdeveloperblog.photoapp.api.users.ui.model.UserResponseModel;
@@ -40,15 +34,17 @@ public class UsersController {
 
 	@Autowired
 	RestTemplate restTemplate;
-	
-	
+
 	@GetMapping("/status/check")
 	public String status() {
-		return "working" + environment.getProperty("local.server.port");
+		String name = environment.getProperty("username.myname");
+		System.out.println(name);
+		return "working" + environment.getProperty("local.server.port") + name;
 	}
 
 	@PostMapping("/save")
 	public ResponseEntity<CreateUserResponseModel> createUser(@Valid @RequestBody CreateUserRequestModel userDetails) {
+
 		UserDto userDtoRequest = UserUtils.mapCreateUserRequestModelToUserDto(userDetails);
 		UserDto savedUserDto = userService.createUser(userDtoRequest);
 		CreateUserResponseModel createUserResponseModel = UserUtils.mapUserDtoToCreateUserResponseModel(savedUserDto);
@@ -63,9 +59,10 @@ public class UsersController {
 //		ResponseEntity<List<AlbumResponseModel>> albumListResponse =restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<AlbumResponseModel>>() {
 //		});
 //		userResponseModel.setAlbums(albumListResponse.getBody());
-		
-		//List<AlbumResponseModel> albumListResponse =  albumServiceClient.getAlbum(userId);
-		//userResponseModel.setAlbums(albumListResponse);
+
+		// List<AlbumResponseModel> albumListResponse =
+		// albumServiceClient.getAlbum(userId);
+		// userResponseModel.setAlbums(albumListResponse);
 		return ResponseEntity.status(HttpStatus.OK).body(userResponseModel);
 	}
 

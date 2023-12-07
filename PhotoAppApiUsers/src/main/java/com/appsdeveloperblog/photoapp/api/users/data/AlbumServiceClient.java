@@ -12,7 +12,6 @@ import com.appsdeveloperblog.photoapp.api.users.ui.model.AlbumResponseModel;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 
-
 @FeignClient(name="albums-ws")
 public interface AlbumServiceClient {
 
