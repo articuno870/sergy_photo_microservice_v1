@@ -2,7 +2,6 @@ package com.appsdeveloperblog.photoapp.api.users.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +18,6 @@ import com.appsdeveloperblog.photoapp.api.users.data.UserRepository;
 import com.appsdeveloperblog.photoapp.api.users.shared.UserDto;
 import com.appsdeveloperblog.photoapp.api.users.ui.model.AlbumResponseModel;
 import com.appsdeveloperblog.photoapp.api.users.utils.UserUtils;
-
-import feign.FeignException;
 
 @Service
 public class UserServiceImpl implements UserService {
